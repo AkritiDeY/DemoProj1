@@ -15,22 +15,49 @@ namespace DemoProj1.Repositry
             DbContext = dbContext;
         }
 
-        public studentDetails1 Add(studentDetails1 student)
+        public IEnumerable<studentDetails1> Add(studentDetails1 student)
         {
             DbContext.studentDetails1.Add(student);
             DbContext.SaveChanges();
-            return student;
-            
+            return DbContext.studentDetails1.ToList();
+
         }
 
         public void Delete(int key)
         {
-            throw new NotImplementedException();
+            studentDetails1 studItem = DbContext.studentDetails1.Where(p => p.StudId == key).FirstOrDefault();
+            if (studItem != null)
+            {
+                DbContext.studentDetails1.Remove(studItem);
+                DbContext.SaveChanges();
+            }
         }
 
-        public studentDetails1 Edit(int key)
+        public IEnumerable<studentDetails1> Edit(studentDetails1 student)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // var c= DbContext.studentDetails1.Where(p => p.StudId == student.StudId).FirstOrDefault();
+                studentDetails1 studItem = DbContext.studentDetails1.Where(p => p.StudId == student.StudId).FirstOrDefault();
+                // DbContext.studentDetails1.Update(student);
+                //  DbContext.SaveChanges();
+                if (studItem != null)
+                {
+                    studItem.StudId = student.StudId;
+                    studItem.FirstName = student.FirstName;
+                    studItem.LastName = student.LastName;
+                    studItem.Age = student.Age;
+                    DbContext.SaveChanges();
+
+                }
+                DbContext.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+                // return DbContext.studentDetails1.ToList();
+            }
+            return DbContext.studentDetails1.ToList();
         }
 
         public IEnumerable<studentDetails1> Read()

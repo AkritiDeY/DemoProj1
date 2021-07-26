@@ -31,6 +31,9 @@ namespace DemoProj1
             services.AddScoped<IStudent, StudentRepo>();
             services.AddDbContext<StudentContext>(adsome=>adsome.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
 
+            services.AddScoped<IDepartment, DepartmentRepo>();
+            services.AddDbContext<studentDbContext>(adsome => adsome.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
+
             //services.AddDbContext<StudentContext>(options" "=>",options.UseSqlServer(Configuration.GetConnectionString(\"MvcMovieContext\")));
             //IServiceCollection serviceCollection = services.AddDbContext<StudentContext>(adsome => adsome.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
             services.AddControllers();

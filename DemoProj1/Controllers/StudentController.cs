@@ -1,10 +1,8 @@
 ﻿using DemoProj1.Models;
 using DemoProj1.Repositry;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,14 +36,17 @@ namespace DemoProj1.Controllers
 
         // POST api/<StudentController>
         [HttpPost]
-        public void Post([FromBody] studentDetails1 student )
+        public IEnumerable<studentDetails1> Post([FromBody] studentDetails1 student)
         {
-            stud.Add(student);
+            IEnumerable<studentDetails1> get = stud.Add(student);
+            return get.ToList();
+            //stud.Add(student);
+            //return Ok(stud.Add(student));
         }
 
         // PUT api/<StudentController>/5
-        [HttpPut("{id}")]
-        public void PUT(int id, studentDetails1 student)
+        [HttpPut]
+        public IEnumerable<studentDetails1> PUT([FromBody] studentDetails1 student)
         {
             /*var customer1 = stud.Readkey(id);
             foreach(studentDetails1 s in customer1){
@@ -53,12 +54,16 @@ namespace DemoProj1.Controllers
             }
             db.Entry(customer1).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();*/
+            //stud.Edit(student);
+            IEnumerable<studentDetails1> get = stud.Edit(student);
+            return get.ToList();
         }
 
         // DELETE api/<StudentController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            stud.Delete(id);
             /*var del = stud.Readkey(id);
             stud.Delete(del);
             stud.SaveChanges();*/

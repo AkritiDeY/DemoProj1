@@ -8,10 +8,10 @@ namespace DemoProj1.Repositry
 {
     public interface IStudent
     {
-        studentDetails1 Add(studentDetails1 student);
+        IEnumerable<studentDetails1> Add(studentDetails1 student);
         IEnumerable<studentDetails1> Read();
         IEnumerable<studentDetails1> Readkey(int key);
         void Delete(int key);
-        studentDetails1 Edit(int key);
+        IEnumerable<studentDetails1> Edit(studentDetails1 student);
     }
 }

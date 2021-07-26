@@ -17,7 +17,7 @@ namespace DemoProj1.Models
         {
         }
 
-        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Department> Department { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
