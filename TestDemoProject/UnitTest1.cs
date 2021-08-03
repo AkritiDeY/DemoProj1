@@ -8,7 +8,7 @@ namespace TestDemoProject
 {
     public class UnitTest1
     {
-        private readonly IStudent stud;
+       // private readonly Istudentservices stud;
         [Fact]
         public void Test1()
         {

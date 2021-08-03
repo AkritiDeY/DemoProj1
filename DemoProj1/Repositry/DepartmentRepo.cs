@@ -11,7 +11,7 @@ namespace DemoProj1.Repositry
     public class DepartmentRepo : IDepartment,ILogger
     {
         private readonly studentDbContext DbContext;
-        private readonly ILogger log;
+     //   private readonly ILogger log;
 
         public DepartmentRepo(studentDbContext dbContext)
         {
@@ -57,14 +57,9 @@ namespace DemoProj1.Repositry
         public IQueryable<Department> Readkey(int key)
         {
             //throw new NotImplementedException();
-            try
-            {
+           
                 return DbContext.Department.FromSqlRaw("exec depDetailsbyID {0}", key);
-            }
-            catch (Exception e)
-            {
-                log.Log<Department>(e);
-            }
+            
         }
     }
 }

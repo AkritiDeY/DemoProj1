@@ -1,5 +1,6 @@
 using DemoProj1.Models;
 using DemoProj1.Repositry;
+using DemoProj1.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,7 @@ namespace DemoProj1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IStudent, StudentRepo>();
+            services.AddScoped<IStudentServices, Service>();
             services.AddDbContext<StudentContext>(adsome=>adsome.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
 
             services.AddScoped<IDepartment, DepartmentRepo>();
@@ -46,6 +48,11 @@ namespace DemoProj1
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(a=>a.AllowAnyMethod());
+
+            app.UseCors(a => a.AllowAnyHeader());
+            app.UseCors(a => a.AllowAnyOrigin());
+           // app.UseCors(a => a.AllowAnyMethod());
 
             app.UseHttpsRedirection();
 

@@ -1,5 +1,6 @@
 ﻿using DemoProj1.Models;
 using DemoProj1.Repositry;
+using DemoProj1.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,25 +13,26 @@ namespace DemoProj1.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        private readonly IStudent stud;
+        private readonly IStudentServices _studserv;
 
-        public StudentController(IStudent stud)
+        public StudentController(IStudentServices Studserv)
         {
-            this.stud = stud;
+          _studserv = Studserv;
+            
         }
 
         // GET: api/<StudentController>
         [HttpGet]
         public IEnumerable<studentDetails1> Get()
         {
-            return stud.Read().ToList();
+            return _studserv.GetStudent().ToList();
         }
 
         // GET api/<StudentController>/5
         [HttpGet("{id}")]
         public IEnumerable<studentDetails1> Get(int id)
         {
-            IEnumerable<studentDetails1> get = stud.Readkey(id);
+            IEnumerable<studentDetails1> get = _studserv.GetStudentByKey(id);
             return get.ToList();
         }
 
@@ -38,7 +40,7 @@ namespace DemoProj1.Controllers
         [HttpPost]
         public IEnumerable<studentDetails1> Post([FromBody] studentDetails1 student)
         {
-            IEnumerable<studentDetails1> get = stud.Add(student);
+            IEnumerable<studentDetails1> get = _studserv.AddStudent(student);
             return get.ToList();
             //stud.Add(student);
             //return Ok(stud.Add(student));
@@ -55,7 +57,7 @@ namespace DemoProj1.Controllers
             db.Entry(customer1).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();*/
             //stud.Edit(student);
-            IEnumerable<studentDetails1> get = stud.Edit(student);
+            IEnumerable<studentDetails1> get = _studserv.EditStudent(student);
             return get.ToList();
         }
 
@@ -63,7 +65,7 @@ namespace DemoProj1.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            stud.Delete(id);
+            _studserv.DeleteStudent(id);
             /*var del = stud.Readkey(id);
             stud.Delete(del);
             stud.SaveChanges();*/
