@@ -11,7 +11,7 @@ namespace DemoProj1.Repositry
         IEnumerable<studentDetails1> Add(studentDetails1 student);
         IEnumerable<studentDetails1> Read();
         IEnumerable<studentDetails1> Readkey(int key);
-        void Delete(int key);
-        IEnumerable<studentDetails1> Edit(studentDetails1 student);
+        int Delete(int key);
+        int Edit(studentDetails1 student);
     }
 }

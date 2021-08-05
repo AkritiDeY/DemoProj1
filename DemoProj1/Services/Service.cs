@@ -21,12 +21,12 @@ namespace DemoProj1.Services
             return _stud.Add(student);
         }
 
-        public void DeleteStudent(int key)
+        public int DeleteStudent(int key)
         {
-            _stud.Delete(key);
+           return _stud.Delete(key);
         }
 
-        public IEnumerable<studentDetails1> EditStudent(studentDetails1 student)
+        public int EditStudent(studentDetails1 student)
         {
             return _stud.Edit(student);
         }

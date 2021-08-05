@@ -14,11 +14,11 @@ namespace DemoProj1.Services
         public IEnumerable<studentDetails1> GetStudent();
         public IEnumerable<studentDetails1> AddStudent(studentDetails1 student);
 
-        public IEnumerable<studentDetails1> EditStudent(studentDetails1 student);
+        public int EditStudent(studentDetails1 student);
 
         public IEnumerable<studentDetails1> GetStudentByKey(int key);
 
-        public void DeleteStudent(int key);
+        public int DeleteStudent(int key);
 
     }
 }

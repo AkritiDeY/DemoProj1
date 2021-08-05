@@ -48,7 +48,7 @@ namespace DemoProj1.Controllers
 
         // PUT api/<StudentController>/5
         [HttpPut]
-        public IEnumerable<studentDetails1> PUT([FromBody] studentDetails1 student)
+        public int PUT([FromBody] studentDetails1 student)
         {
             /*var customer1 = stud.Readkey(id);
             foreach(studentDetails1 s in customer1){
@@ -57,15 +57,15 @@ namespace DemoProj1.Controllers
             db.Entry(customer1).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();*/
             //stud.Edit(student);
-            IEnumerable<studentDetails1> get = _studserv.EditStudent(student);
-            return get.ToList();
+            int get = _studserv.EditStudent(student);
+            return get;
         }
 
         // DELETE api/<StudentController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public int Delete(int id)
         {
-            _studserv.DeleteStudent(id);
+          return  _studserv.DeleteStudent(id);
             /*var del = stud.Readkey(id);
             stud.Delete(del);
             stud.SaveChanges();*/
