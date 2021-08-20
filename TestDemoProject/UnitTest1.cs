@@ -23,17 +23,17 @@ namespace TestDemoProject
             
             var services = fixture.Create<IStudentServices>();
 
-           //var request = fixture.Create<studentDetails1>();
-            //fixture.Customize<studentDetails1>(c => c.Without(i => i.StudId));
+           var request = fixture.Create<studentDetails1>();
+            fixture.Customize<studentDetails1>(c => c.Without(i => i.StudId));
 
-            var requestStud = fixture.Build<studentDetails1>().Without(i => i.StudId).Create();
+            //var requestStud = fixture.Build<studentDetails1>().Without(i => i.StudId).Create();
 
             //fixture.Build<Person>().Without(p => p.Spouse).CreateAnonymous();
 
             
             var sut = new StudentController(services);
 
-            var response = sut.Post(requestStud);
+            var response = sut.Post(request);
 
             List<studentDetails1> studentDetails = new List<studentDetails1>()
             {
