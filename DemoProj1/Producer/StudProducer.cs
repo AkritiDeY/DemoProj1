@@ -36,8 +36,6 @@ namespace DemoProj1.Producer
 
             await producer.ProduceAsync("studentTopic", new Message<Null, string>()
             {
-
-
                 Value = "this is kafka test"
             }, cancellationToken);
         }

@@ -40,7 +40,7 @@ namespace DemoProj1.Controllers
         [HttpPost]
         public IEnumerable<studentDetails1> Post([FromBody] studentDetails1 student)
         {
-            IEnumerable<studentDetails1> get = _studserv.AddStudent(student);
+            IEnumerable<studentDetails1> get = _studserv.AddStudentAsync(student);
             return get.ToList();
             //stud.Add(student);
             //return Ok(stud.Add(student));

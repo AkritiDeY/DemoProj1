@@ -12,7 +12,7 @@ namespace DemoProj1.Services
       
 
         public IEnumerable<studentDetails1> GetStudent();
-        public IEnumerable<studentDetails1> AddStudent(studentDetails1 student);
+        public IEnumerable<studentDetails1> AddStudentAsync(studentDetails1 student);
 
         public int EditStudent(studentDetails1 student);
 
