@@ -1,4 +1,5 @@
 using DemoProj1.Models;
+using DemoProj1.Producer;
 using DemoProj1.Repositry;
 using DemoProj1.Services;
 using Microsoft.AspNetCore.Builder;
@@ -30,6 +31,7 @@ namespace DemoProj1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IStudent, StudentRepo>();
+            services.AddHostedService<StudProducer>();
             services.AddScoped<IStudentServices, Service>();
             services.AddDbContext<StudentContext>(adsome=>adsome.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
 

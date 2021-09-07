@@ -19,7 +19,8 @@ namespace DemoProj1.Repositry
         {
             DbContext.studentDetails1.Add(student);
             DbContext.SaveChanges();
-            return DbContext.studentDetails1.ToList();
+                return DbContext.studentDetails1.ToList();
+           
 
         }
 

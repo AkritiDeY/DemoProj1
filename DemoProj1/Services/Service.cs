@@ -18,7 +18,7 @@ namespace DemoProj1.Services
 
         public IEnumerable<studentDetails1> AddStudent(studentDetails1 student)
         {
-            return _stud.Add(student);
+            var res= _stud.Add(student);
         }
 
         public int DeleteStudent(int key)
