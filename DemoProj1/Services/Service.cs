@@ -2,6 +2,7 @@
 using DemoProj1.Models;
 using DemoProj1.Repositry;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,16 +33,27 @@ namespace DemoProj1.Services
         }
 
 
-        public async Task<IEnumerable<studentDetails1>> AddStudentAsync(studentDetails1 student)
+        public  IEnumerable<studentDetails1> AddStudentAsync(studentDetails1 student)
         {
            var response = _stud.Add(student);
+            //  var response = await _httpClient.SendAsync(Request);
+            //IEnumerable<studentDetails1> res
 
-            string strStud = response.ToString();
+            // = JsonSerializer.Deserialize<IEnumerable<studentDetails1>>(response);
+            // res = JsonConvert.DeserializeObject<IEnumerable<studentDetails1>>(result);
 
-            var res = await _studproducer.ProduceAsync("studentTopic", new Message<Null, string>
-            {
-                Value = strStud
-            });
+
+
+
+
+
+
+            var userDataString = JsonConvert.SerializeObject(response);
+
+              var res = _studproducer.ProduceAsync("studentTopic", new Message<Null, string>
+              {
+                  Value = userDataString
+              });
 
             return response;
         }
