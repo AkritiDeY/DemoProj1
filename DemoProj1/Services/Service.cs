@@ -17,13 +17,13 @@ namespace DemoProj1.Services
     {
         private readonly IStudent _stud;
         // private readonly IProducer<Null, string> _studproducer;
-        private ProducerConfig _config;
+        //private ProducerConfig _config;
 
-        public Service(ProducerConfig config,)
+      /*  public Service(ProducerConfig config,)
         {
             _config = config;
         }
-
+      */
         public Service(IStudent stud)
         {
             _stud = stud;
@@ -40,9 +40,17 @@ namespace DemoProj1.Services
 
             // = JsonSerializer.Deserialize<IEnumerable<studentDetails1>>(response);
             // res = JsonConvert.DeserializeObject<IEnumerable<studentDetails1>>(result);
+            var config = new ProducerConfig()
+            {
+                BootstrapServers = "localhost:9092"
 
 
-            using (var producer = new ProducerBuilder<Null, string>(_config).Build())
+
+
+            };
+
+
+            using (var producer = new ProducerBuilder<Null, string>(config).Build())
             {
                 try
                 {
