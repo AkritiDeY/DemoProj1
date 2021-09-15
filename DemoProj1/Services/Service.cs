@@ -8,29 +8,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace DemoProj1.Services
 {
     public class Service : IStudentServices //IHostedService
     {
         private readonly IStudent _stud;
-        private readonly IProducer<Null, string> _studproducer;
+        // private readonly IProducer<Null, string> _studproducer;
+        private ProducerConfig _config;
+
+        public Service(ProducerConfig config,)
+        {
+            _config = config;
+        }
 
         public Service(IStudent stud)
         {
             _stud = stud;
         }
 
-        public Service()
-        {
-            var config = new ProducerConfig()
-            {
-                BootstrapServers = "localhost:9092"
-
-
-            };
-            _studproducer = new ProducerBuilder<Null, string>(config).Build();
-        }
+       
 
 
         public  IEnumerable<studentDetails1> AddStudentAsync(studentDetails1 student)
@@ -43,17 +42,40 @@ namespace DemoProj1.Services
             // res = JsonConvert.DeserializeObject<IEnumerable<studentDetails1>>(result);
 
 
+            using (var producer = new ProducerBuilder<Null, string>(_config).Build())
+            {
+                try
+                {
+                    producer.ProduceAsync("studentTopic", new Message<Null, string>
+                    {
+                        Value="Producer sending message"
+
+                    });
+                }
+
+                catch(Exception e)
+                {
+
+                }
+
+
+            }
 
 
 
 
+            //  var userDataString = JsonConvert.SerializeObject(response);
+            // var result = JsonConvert.DeserializeObject<studentDetails1>(userDataString);
+            // Console.WriteLine(userDataString);
+            //  string jsonString = System.Text.Json.JsonSerializer.Serialize(response);
+            // var result = JsonConvert.DeserializeObject<StringConversion>(userDataString);
 
-            var userDataString = JsonConvert.SerializeObject(response);
+           /* string mess = "producer";
 
-              var res = _studproducer.ProduceAsync("studentTopic", new Message<Null, string>
+            _studproducer.ProduceAsync("studentTopic", new Message<Null, string>
               {
-                  Value = userDataString
-              });
+                  Value = mess
+            });*/
 
             return response;
         }

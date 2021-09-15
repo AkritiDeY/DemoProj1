@@ -1,3 +1,4 @@
+using Confluent.Kafka;
 using DemoProj1.Models;
 
 using DemoProj1.Repositry;
@@ -31,6 +32,9 @@ namespace DemoProj1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IStudent, StudentRepo>();
+            var producerConfig = new ProducerConfig();
+            Configuration.Bind("producer", producerConfig);
+            services.AddSingleton<ProducerConfig>(producerConfig);
           //  services.AddHostedService<StudProducer>();
             services.AddScoped<IStudentServices, Service>();
             services.AddDbContext<StudentContext>(adsome=>adsome.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
